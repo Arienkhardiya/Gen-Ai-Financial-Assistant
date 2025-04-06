@@ -1,0 +1,47 @@
+{
+  "version": 2,
+  "buildCommand": "npm install --legacy-peer-deps && npm run build",
+  "installCommand": "npm install --legacy-peer-deps",
+  "framework": "nextjs",
+  "regions": ["iad1"],
+  "env": {
+    "NEXT_PUBLIC_SUPABASE_URL": "https://bbgggdxypkbejneeswmh.supabase.co",
+    "NEXT_PUBLIC_SUPABASE_ANON_KEY": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJiZ2dnZHh5cGtiZWpuZWVzd21oIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDI2NTMxMTksImV4cCI6MjA1ODIyOTExOX0.7n0GTiRtT-ACULszNGyz08YO092HTc81MXgPKWEF_-k",
+    "OPENAI_API_KEY": "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",
+    "YAHOO_FINANCE_API_KEY": "c080d0a746msh8a63a9ed7be3a91p12efe6jsn8e1bd7415313",
+    "ALPHA_VANTAGE_API_KEY": "RCR33GFY9GSQNAKO",
+    "GEMINI_API_KEY": "AIzaSyCZPInH2Wd86-fTqfi9FsRLc0gpyQ3IziM",
+    "RECAPTCHA_SITE_KEY": "6Le8RAsrAAAAAM6DwaQBa9_0cIKS6oezUtYMKzVh",
+    "JWT_SECRET": "f59cf2407afe468bb9a1a923ff40d58b44133fb0bd6aaa75560d773528f8f4447ad0497134dba564f6d201e7bba961b9ec703b0433ab29db62195d1074cfb669",
+    "ENCRYPTION_KEY": "541a7fa21f914885fc9b847685341432dd277f88040f7854557622da6755d39b",
+    "NEXT_PUBLIC_APP_URL": "https://v0-you-tube-playlist-generator-1pbxfs.vercel.app/",
+    "NEXT_PUBLIC_FIREBASE_API_KEY": "AIzaSyC7ay8z3GFpXLnql_Hnk_UeTzX5on59hK4",
+    "NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN": "finai-advisor-71a50.firebaseapp.com",
+    "NEXT_PUBLIC_FIREBASE_PROJECT_ID": "finai-advisor-71a50",
+    "NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET": "finai-advisor-71a50.firebasestorage.app",
+    "NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID": "152350345169",
+    "NEXT_PUBLIC_FIREBASE_APP_ID": "1:152350345169:web:1efdd9a1eb45b2d9e0c2f0",
+    "NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID": "G-EWE46VTP47",
+    "NEXT_PUBLIC_FIREBASE_DATABASE_URL": "https://finai-advisor-71a50-default-rtdb.firebaseio.com",
+    "FIREBASE_CLIENT_EMAIL": "firebase-adminsdk-fbsvc@finai-advisor-71a50.iam.gserviceaccount.com",
+    "FIREBASE_PRIVATE_KEY": "-----BEGIN PRIVATE KEY-----\nMIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQD98F87UURUUkWC\nJaouMX6lH20Z8kEaY37AXTjC2GEw5d8ep99XNayP/b+wLGPCeEIu0wHk9NswYj/j\nDtSaYYuDCJHX52x5S5J+lHDfG1Nx4rkdZcYnkSLi4ub/+NHelZuenhoT3GujccKW\ngiuqFoSAmSzgT7tzHBhtg2YCNbqDjcENbv5G4tHVXnfLfKev/u3Z4PKKwMiaaCPB\nOEL6PgUpo+Ji8jdXYG4+NrO4o1+toH4eN+eo+xYslq1Oq+EVnWK3x+FuLUFPjzJk\nd0Pbgdeqb7B133Bzc0trA+kaakut2m+RXlbWygRmh36yX4213Slv+iKGp6aa29N2\nkpo5oGKJAgMBAAECggEAGGiwBrgfjMlhtAphytHoHgAg0RMnrd0tdFkhmR0KbpRR\n95TkU3It1aNq9wi1SB6eIfkXYAYnQYXYJT+qMPK6YcyDlFDC7P/WI4OqO8/ZHAPS\njmBXhTsestdjo+wrZC1WSY9h61HPKOVI8oWto8pJT0Ep/p+7YWusb25nckPu2zEm\nfqCDwCpnuguvkDoAJqzF2uc9HgrE8mvFTSCLmCQP2cM+9Ek/j7boY4LdRw6QMYAl\niIP7UPCvBy1Mwhl5w0AXipyhw67q3o5mchmdPxQFaAgqGIHHHEN+etQ2N4UTH4Q4\noEsxMa/yzyUzqjpi2HSK/iTf3BaJR3cjZ5QSEo6f5wKBgQD/y3c1tw4qhL4m6nfr\n/WQ4Zi98AaswvrnTZzetQnaCAJ5hOg+Ff8P6fgvsKp3PPCGaQXfEttDwt0TwoPMI\nkVXbcJo9Rg2l1C3xuHdEN9CiX1JGuAfvTs/uaZDdhn1t76DJ/+YKEKC0342dqSoZ\n7LZJX7lZUsp8UqQgKx+HUNIdJwKBgQD+JIZy2UHp4dmm5KcrONCdNEDVZNHEwWt5\ntH1GJA2ndQ0yVzmgOiO7evM3JntyALYDrOYEohEdUOTpJA0DUd+qcSu3SNRstWFA\npsu+gkwPejtg5VOwm1aBtYeQzPL0wshxgpqO8BgZvSVzatw1OtI/mJ6o7/ts+B+G\npRkn5NCwzwKBgQDiJ6s7Q6BzuS9ByvXCISN1tervsa4Ah/BV16FjPyr138Qn5CSK\n/J5yHvU9laQ28EwpTQ6uTpBG81Ixiau2fICzZkgIOqKgZgtE9roEB3EfzjU5L0Zc\nr4qpmI4rPdgx1baMQgLKDU94+1oC9eiySRYVo1uFfOxnpM1VX6sdgThz6wKBgQCn\n9B2CYwADgAWmHPA5STfc3H6ISDO1MxpC+TvdEdCQPXP2M9zaffHFYdDAPsdQJRYk\nwavVngFvfVl6lh+fdQk6i8YXP6NbIFdgMZrukQ+RHveE5qlzSoVV/VDVKgzaIqvz\nEBvyoMtcnzrT1ugmqXPvIX6hKM/hSO0Uv6ErUzVz0wKBgQD8nzLO57Aijx0v1AKu\ns9Z4KVnYPKmfbmImVlsfpbpfWgN1bSVEWnm4PnzeXdcsMUGMa9LeL4/CE6MRvp+2\n1TG8gBfJn/Ocl4n0WemuWeSDmQgnqNHif2GFq2NiUYJWF/FA1I+sUFQO1noU0CPT\neyORIvhZ731BqeiXKx8fbozhGg==\n-----END PRIVATE KEY-----\n",
+    "CRON_SECRET": "475af1c343c3d8def68686f36b8beb4c2c7ab8527297d2ce1ce809735fed5d3c",
+    "UPSTASH_REDIS_REST_URL": "https://mighty-kit-62351.upstash.io",
+    "UPSTASH_REDIS_REST_TOKEN": "AfOPAAIjcDExMGNlNDgyMjQ3ODU0MzQ2YjQ3NGEwNTY5ZGU5MzYxZnAxMA",
+    "GOOGLE_CLIENT_ID": "754229372769-l6k4ndogvtue319sajpe68rhakfrrlbo.apps.googleusercontent.com",
+    "GOOGLE_CLIENT_SECRET": "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",
+    "GITHUB_CLIENT_ID": "Ov23liDWwlZD4cBduzKb",
+    "GITHUB_CLIENT_SECRET": "3cab4078093cf95c3ef565777d3a03e1461382cc"
+  },
+  "crons": [
+    {
+      "path": "/api/cron/generate-insights",
+      "schedule": "0 8 * * *"
+    },
+    {
+      "path": "/api/cron/update-market-data",
+      "schedule": "*/15 * * * *"
+    }
+  ]
+}
+

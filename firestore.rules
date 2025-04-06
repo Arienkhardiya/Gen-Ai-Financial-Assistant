@@ -1,0 +1,195 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Helper functions
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+    
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+    
+    function hasRole(role) {
+      return isAuthenticated() && 
+        exists(/databases/$(database)/documents/userProfiles/$(request.auth.uid)) && 
+        get(/databases/$(database)/documents/userProfiles/$(request.auth.uid)).data.role == role;
+    }
+    
+    function isAdmin() {
+      return hasRole("admin");
+    }
+    
+    function isPremium() {
+      return hasRole("premium") || isAdmin();
+    }
+    
+    // User Profiles
+    match /userProfiles/{userId} {
+      allow read: if isOwner(userId) || isAdmin();
+      allow create: if isAuthenticated() && request.auth.uid == userId;
+      allow update: if isOwner(userId) || isAdmin();
+      allow delete: if isAdmin();
+    }
+    
+    // Portfolios
+    match /portfolios/{portfolioId} {
+      allow read: if isAuthenticated() && (
+        resource.data.userId == request.auth.uid || isAdmin()
+      );
+      allow create: if isAuthenticated() && request.resource.data.userId == request.auth.uid;
+      allow update: if isAuthenticated() && resource.data.userId == request.auth.uid;
+      allow delete: if isAuthenticated() && resource.data.userId == request.auth.uid;
+    }
+    
+    // Portfolio Assets
+    match /portfolioAssets/{assetId} {
+      allow read: if isAuthenticated() && (
+        get(/databases/$(database)/documents/portfolios/$(resource.data.portfolioId)).data.userId == request.auth.uid || 
+        isAdmin()
+      );
+      allow create: if isAuthenticated() && 
+        get(/databases/$(database)/documents/portfolios/$(request.resource.data.portfolioId)).data.userId == request.auth.uid;
+      allow update: if isAuthenticated() && 
+        get(/databases/$(database)/documents/portfolios/$(resource.data.portfolioId)).data.userId == request.auth.uid;
+      allow delete: if isAuthenticated() && 
+        get(/databases/$(database)/documents/portfolios/$(resource.data.portfolioId)).data.userId == request.auth.uid;
+    }
+    
+    // Transactions
+    match /transactions/{transactionId} {
+      allow read: if isAuthenticated() && (
+        resource.data.userId == request.auth.uid || isAdmin()
+      );
+      allow create: if isAuthenticated() && request.resource.data.userId == request.auth.uid;
+      allow update: if isAuthenticated() && resource.data.userId == request.auth.uid;
+      allow delete: if isAuthenticated() && resource.data.userId == request.auth.uid;
+    }
+    
+    // Budgets
+    match /budgets/{budgetId} {
+      allow read: if isAuthenticated() && (
+        resource.data.userId == request.auth.uid || isAdmin()
+      );
+      allow create: if isAuthenticated() && request.resource.data.userId == request.auth.uid;
+      allow update: if isAuthenticated() && resource.data.userId == request.auth.uid;
+      allow delete: if isAuthenticated() && resource.data.userId == request.auth.uid;
+    }
+    
+    // Watchlists
+    match /watchlists/{watchlistId} {
+      allow read: if isAuthenticated() && (
+        resource.data.userId == request.auth.uid || isAdmin()
+      );
+      allow create: if isAuthenticated() && request.resource.data.userId == request.auth.uid;
+      allow update: if isAuthenticated() && resource.data.userId == request.auth.uid;
+      allow delete: if isAuthenticated() && resource.data.userId == request.auth.uid;
+    }
+    
+    // Watchlist Items
+    match /watchlistItems/{itemId} {
+      allow read: if isAuthenticated() && (
+        get(/databases/$(database)/documents/watchlists/$(resource.data.watchlistId)).data.userId == request.auth.uid || 
+        isAdmin()
+      );
+      allow create: if isAuthenticated() && 
+        get(/databases/$(database)/documents/watchlists/$(request.resource.data.watchlistId)).data.userId == request.auth.uid;
+      allow update: if isAuthenticated() && 
+        get(/databases/$(database)/documents/watchlists/$(resource.data.watchlistId)).data.userId == request.auth.uid;
+      allow delete: if isAuthenticated() && 
+        get(/databases/$(database)/documents/watchlists/$(resource.data.watchlistId)).data.userId == request.auth.uid;
+    }
+    
+    // Financial Goals
+    match /financialGoals/{goalId} {
+      allow read: if isAuthenticated() && (
+        resource.data.userId == request.auth.uid || isAdmin()
+      );
+      allow create: if isAuthenticated() && request.resource.data.userId == request.auth.uid;
+      allow update: if isAuthenticated() && resource.data.userId == request.auth.uid;
+      allow delete: if isAuthenticated() && resource.data.userId == request.auth.uid;
+    }
+    
+    // AI Insights
+    match /aiInsights/{insightId} {
+      allow read: if isAuthenticated() && (
+        resource.data.userId == request.auth.uid || isAdmin()
+      );
+      allow create: if isAdmin(); // Only created by backend functions
+      allow update: if isAuthenticated() && resource.data.userId == request.auth.uid && 
+        (request.resource.data.diff(resource.data).affectedKeys().hasOnly(['read', 'actionTaken']));
+      allow delete: if isAuthenticated() && resource.data.userId == request.auth.uid;
+    }
+    
+    // Chat History
+    match /chatHistory/{chatId} {
+      allow read: if isAuthenticated() && (
+        resource.data.userId == request.auth.uid || isAdmin()
+      );
+      allow create: if isAuthenticated() && request.resource.data.userId == request.auth.uid;
+      allow delete: if isAuthenticated() && resource.data.userId == request.auth.uid;
+    }
+    
+    // Market Data (public read)
+    match /marketData/{symbol} {
+      allow read: if isAuthenticated();
+      allow write: if isAdmin(); // Only backend functions should write
+    }
+    
+    // Market Data Cache (public read)
+    match /marketDataCache/{cacheId} {
+      allow read: if isAuthenticated();
+      allow write: if isAdmin(); // Only backend functions should write
+    }
+    
+    // User Activity Logs
+    match /userActivity/{logId} {
+      allow read: if isAuthenticated() && (
+        resource.data.userId == request.auth.uid || isAdmin()
+      );
+      allow create: if isAuthenticated() && request.resource.data.userId == request.auth.uid;
+      allow update: if false; // Immutable logs
+      allow delete: if isAdmin();
+    }
+    
+    // Notifications
+    match /notifications/{notificationId} {
+      allow read: if isAuthenticated() && (
+        resource.data.userId == request.auth.uid || isAdmin()
+      );
+      allow create: if isAdmin(); // Only created by backend functions
+      allow update: if isAuthenticated() && resource.data.userId == request.auth.uid && 
+        (request.resource.data.diff(resource.data).affectedKeys().hasOnly(['read']));
+      allow delete: if isAuthenticated() && resource.data.userId == request.auth.uid;
+    }
+    
+    // System Settings
+    match /systemSettings/{settingId} {
+      allow read: if isAuthenticated();
+      allow write: if isAdmin();
+    }
+    
+    // User Settings
+    match /userSettings/{userId} {
+      allow read: if isOwner(userId) || isAdmin();
+      allow create: if isAuthenticated() && request.auth.uid == userId;
+      allow update: if isOwner(userId) || isAdmin();
+      allow delete: if isAdmin();
+    }
+    
+    // Premium Features
+    match /premiumFeatures/{featureId} {
+      allow read: if isAuthenticated();
+      allow write: if isAdmin();
+    }
+    
+    // User Subscriptions
+    match /userSubscriptions/{subscriptionId} {
+      allow read: if isAuthenticated() && (
+        resource.data.userId == request.auth.uid || isAdmin()
+      );
+      allow create, update, delete: if isAdmin();
+    }
+  }
+}
+
